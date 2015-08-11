@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Humanitarna Baza</title>
+    <link rel="stylesheet" href="css/plugins/font-awesome/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,800,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/lightbox.css">
+    <link rel="stylesheet" href="css/plugins/animate-css/animate.min.css">
+    <script src="js/plugins/lodash/index.js"></script>
+    
+    <!-- Lo-Dash is needed for G-Maps -->
+     <script src="js/plugins/angular/angular.min.js"></script>
+    <script src="js/plugins/angular/angular-animate.min.js"></script>
+    <script src="js/plugins/angular/angular-route.min.js"></script>
+    <script src="js/plugins/angular/angular-google-maps.min.js"></script>
+    <!-- This is the order for G-Maps -->
+    <script src="js/plugins/ng-flow/ng-flow-standalone.min.js"></script>
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+    <script src='http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble.js'></script>
+    <script src="app.js"></script>
+    <script src="controllers/entry.js"></script>
+    <script src="controllers/listing.js"></script>
+    <script src="controllers/map.js"></script>
+    <script src="controllers/nav.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
+</head>
+
+<body flow-prevent-drop>
+    <div class="wrapper nav" ng-controller="NavigationController">
+        <div class="container">
+            <ul>
+                <li class="login" ng-class="{hidden: currentUser}"><a ng-click="toggle()"><i class="fa fa-user"></i></a>
+                </li>
+                <li><a href="#/home" title="Home"><i class="fa fa-home"></i></a></li>
+                <li><a href="#/lista" title="Lista"><i class="fa fa-list"></i></a></li>
+                <li><a href="#/unos" title="Unos"><i class="fa fa-pencil"></i></a></li>
+                <li class="info hidden" ng-class="{hidden: !currentUser}"><span class="user">Es selam, <span class="user-name">{{currentUser}}</span></span> <a href="#/home" ng-click="userLogout()" title="Izlaz"><i class="fa fa-power-off"></i></a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <form name="login" class="login-box ng-hide" ng-submit="userLogin()" novalidate ng-show="loginButtonStatus">
+                <input type="email" autofocus name="email" ng-required="true" ng-model="user.email" placeholder="e-mail">
+                <input type="password" name="password" ng-required="true" ng-model="user.password" placeholder="password">
+                <input type="submit" ng-disabled="login.$invalid" value="ULAZ" class="submit">
+                <div class="message" ng-show="message">{{message}}</div>
+            </form>
+        </div>
+    </div>
+    <div class="wrapper main-content" ng-view>
+    </div>
+    <script src="js/plugins/jquery/jquery.js"></script>
+    <script src="js/plugins/lightbox.js"></script>
+</body>
+
+</html>

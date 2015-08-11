@@ -1,0 +1,465 @@
+/*
+    Author: Adnan Sabanovic
+    Description: Humanitarna Baza Udruzenja Prosvjetitelj. Tim Zivinice
+*/
+
+// Variables
+$color: white;
+$colorContent: black;
+$colorHover: #67678F;
+$colorActive: #3E3EB6;
+$navigationColor: #1fa67a;
+$navigationFontSize: 25px;
+$pageWidth: 1200px;
+$pageTopBottomPadding: 46px;
+$containerTopPadding: 50px;
+$contentFontSize: 15px;
+$font-family: 'Open Sans',
+sans-serif;
+$entryHover: #1fa67a;
+$minHeightEntryPreview: 250px;
+@import 'reset';
+// Mixins
+@mixin transition($what, $length) {
+    -webkit-transition: $what $length ease-out;
+    -moz-transition: $what $length ease-out;
+    -ms-transition: $what $length ease-out;
+    transition: $what $length ease-out;
+}
+
+@mixin animation($what, $length) {
+    -webkit-animation: $what $length;
+    -moz-animation: $what $length;
+    -ms-animation: $what $length;
+    animation: $what $length;
+    visibility: visible;
+}
+
+@mixin radius($rad) {
+    -moz-border-radius: $rad;
+    -webkit-border-radius: $rad;
+    border-radius: $rad;
+}
+
+@mixin placeholder ($color) {
+    ::-webkit-input-placeholder {
+        /* WebKit, Blink, Edge */
+        color: $color;
+    }
+    :-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: $color;
+        opacity: 1;
+    }
+    ::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: $color;
+        opacity: 1;
+    }
+    :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: $color;
+    }
+}
+
+// Styles
+body {
+    color: $color;
+    font-family: $font-family;
+    overflow-y: scroll;
+}
+
+@include placeholder ($color);
+body * {
+    font-family: $font-family;
+}
+
+.wrapper {
+    display: block;
+    width: 100%;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    display: block;
+    max-width: $pageWidth;
+    margin: 0 auto
+}
+
+.nav {
+    background-color: $navigationColor;
+    text-align: center;
+    position: fixed;
+    z-index: 10;
+    form {
+        position: absolute;
+        width: 230px;
+        background-color: $navigationColor;
+        top: 0px;
+        left: -7px;
+        padding: 10px 0;
+        .message {
+            font-size: 12px;
+            margin-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        &.ng-hide-animate {
+            @include animation(slideInLeft, .4s);
+        }
+        &.ng-hide-add {
+            @include animation(bounceOut, .4s);
+        }
+        input {
+            display: block;
+            border: none;
+            border-bottom: 1px solid #fff;
+            color: #fff;
+            background: none !important;
+            margin-bottom: 5px;
+            padding: 5px 5px;
+            font-style: italic;
+            width: 200px;
+            margin: 0 10px;
+            &.submit {
+                background: white !important;
+                color: black;
+                padding: 5px 10px;
+                font-weight: bold;
+                font-style: normal;
+                border: none;
+                margin-top: 10px;
+                width: 56px;
+                cursor: pointer;
+            }
+        }
+    }
+    ul {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        text-align: center;
+        li {
+            display: inline-block;
+            padding: 10px 15px;
+            position: relative;
+            &.login {
+                float: left;
+                position: relative;
+                cursor: pointer;
+                visibility: initial;
+                &.hidden {
+                    visibility: hidden;
+                }
+            }
+            &.info {
+                float: right;
+                &.hidden {
+                    visibility: hidden;
+                }
+                & .user {
+                    font-size: 13px;
+                    padding-right: 10px;
+                    position: absolute;
+                    right: 34px;
+                    width: 251px;
+                    top: 13px;
+                    &-name {
+                        padding-left: 5px;
+                        font-weight: bold;
+                        font-size: 17px;
+                    }
+                }
+                &.ng-hide-animate {
+                    @include animation(slideInRight, .4s);
+                }
+                &.ng-hide-add {
+                    @include animation(slideOutRight, .4s);
+                }
+            }
+            a,
+            i {
+                font-size: $navigationFontSize;
+                color: $color;
+                text-decoration: none;
+                @include transition(all, .3s);
+                &:hover {
+                    color: $colorHover;
+                }
+                &:active {
+                    color: $colorActive;
+                }
+            }
+        }
+    }
+}
+
+.main-content {
+    padding: $pageTopBottomPadding 0;
+    color: $colorContent;
+    & > .container {
+        padding-top: $containerTopPadding;
+    }
+    .listing {
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        li {
+            float: left;
+            font-size: $contentFontSize;
+            width: 100%;
+            display: inline-block;
+            border-bottom: 1px solid white;
+            background-color: rgba(31, 168, 124, 0.1);
+            &.header {
+                background: $navigationColor;
+                color: white;
+                .section {
+                    font-weight: 800;
+                }
+            }
+            &.entry {
+                display: none;
+                &:hover {
+                    background-color: $entryHover;
+                    color: white;
+                    i {
+                        opacity: 1;
+                    }
+                }
+                @include animation(slideInLeft, .4s);
+            }
+            .section {
+                position: relative;
+                display: inline-block;
+                float: left;
+                width: 15%;
+                padding: 2px 5px;
+                text-align: center;
+                padding-bottom: 10px;
+                padding-top: 10px;
+                font-weight: 300;
+                //overflow: hidden;
+            }
+            .order {
+                background-color: $navigationColor;
+                color: white;
+                font-weight: 800;
+            }
+            .order,
+            .edit,
+            .view {
+                min-width: 50px;
+                width: 5%;
+                a {
+                    text-decoration: none;
+                }
+            }
+            .edit,
+            .view {
+                font-size: 17px;
+                margin-top: -2px;
+                i {
+                    opacity: 0;
+                    @include transition(color, .3s);
+                    &:hover {
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.entry {
+    strong {
+        font-weight: 800;
+    }
+    .left {
+        float: left;
+        width: 50%;
+        td > img {
+            max-height: 200px;
+        }
+        @include animation(fadeInLeft, .4s);
+        input,
+        textarea {
+            height: 30px;
+            font-size: 17px;
+            padding: 0px 7px;
+            border-style: none none solid;
+            border-bottom-width: 1px;
+            border-bottom-color: black;
+            width: 100%;
+            @include transition(all, .4s);
+        }
+        textarea {
+            min-height: 150px;
+        }
+        select {
+            height: 30px;
+            font-size: 17px;
+            padding: 0px 5px;
+            margin: 5px 0;
+        }
+        label {
+            display: block;
+            font-size: 11px;
+            margin-bottom: 10px;
+            font-style: italic;
+            opacity: .8;
+            text-align: right;
+        }
+        form {
+            padding-right: 50px;
+            &.ng-submitted {
+                input,
+                textarea {
+                    &.ng-invalid {
+                        border-left: 2px solid red;
+                        border-right: 2px solid red;
+                        border-bottom: 2px solid red;
+                        padding: 0px 5px;
+                    }
+                }
+            }
+            & > div {
+                margin-bottom: 10px;
+            }
+            & .submit {
+                font-weight: bold;
+                color: white;
+                background-color: $navigationColor;
+                border: none;
+                letter-spacing: 1px;
+                width: 150px;
+                cursor: pointer;
+                margin-top: 15px;
+            }
+        }
+    }
+    .right {
+        float: left;
+        width: 50%;
+        @include animation(fadeInRight, .4s);
+        .inner {
+            background: $navigationColor;
+            padding: 15px;
+            font-size: 14px;
+            color: $color;
+            min-height: $minHeightEntryPreview;
+            position: fixed;
+            width: 100%;
+            max-width: 600px;
+            line-height: 21px;
+            h1 {
+                font-size: 20px;
+                font-weight: 800;
+                text-align: center;
+                margin-bottom: 15px;
+                letter-spacing: 1px;
+            }
+            div.description {
+                margin: 5px 0;
+                font-weight: bold;
+            }
+            span.description {
+                font-style: italic;
+            }
+        }
+    }
+}
+
+#map {
+    position: fixed !important;
+    height: 100%;
+    width: 100%;
+    @include animation(fadeIn, .4s);
+    .infoWindowContent {
+        font-size: 14px !important;
+        border-top: 2px solid #ccc;
+        padding-top: 10px;
+        color: black;
+        line-height: 20px;
+    }
+    h2 {
+        margin-bottom: 5px;
+        margin-top: 0;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    h3 {
+        padding-bottom: 5px;
+    }
+    .infoWindowHolder {
+        max-width: 500px;
+        overflow: hidden;
+        min-height: 50px;
+    }
+    .img-responsive {
+        max-width: 100%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+.alert {
+    position: fixed;
+    top: 45%;
+    width: 100%;
+    text-align: center;
+    display: none;
+    @include animation(fadeOut, .4s);
+    .inner {
+        display: inline-block;
+        padding: 20px 30px;
+        background-color: $navigationColor;
+        color: $color;
+        font-size: 30px;
+        i {
+            padding-right: 20px;
+        }
+    }
+}
+
+.file-upload {
+    width: 565px;
+    .drop {
+        text-align: center;
+        padding: 35px 0px;
+        background-color: #EDE9E9;
+        border: 2px dashed $navigationColor;
+        margin-top: 10px;
+        position: relative;
+        @include radius(5px);
+        input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: none;
+            opacity: 0;
+            left: 0;
+            top: 0;
+            padding: 0px;
+        }
+    }
+}
+
+.gallery {
+    position: relative;
+    margin-top: 20px;
+    display: inline-block;
+    width: 100%;
+    a {
+        display: inline-block;
+        float: left;
+        padding: 5px;
+        .gallery-holder {
+            width: 178px;
+            height: 117px;
+            display: inline-block;
+            background-size: cover;
+        }
+    }
+}

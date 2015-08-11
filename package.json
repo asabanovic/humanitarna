@@ -1,0 +1,23 @@
+{
+  "name": "humanitarna-baza-podataka",
+  "version": "0.0.1",
+  "description": "Centralna humanitarna baza za udruzenje prosvjetitelj",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.6"
+  },
+  "devDependencies": {},
+   "author": "Adnan Sabanovic",
+  "devDependencies":
+  {
+    "gulp":"latest",
+    "gulp-util": "latest",
+    "gulp-webserver": "latest",
+    "gulp-ruby-sass": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-minify-css": "latest",
+    "gulp-rename": "latest",
+    "font-awesome": "latest"
+  }
+}

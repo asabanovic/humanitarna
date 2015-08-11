@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="entry">
+        <div class="left">
+            <form name="entry" novalidate ng-submit="addCase()">
+                <div>
+                    <label>Ime (*)</label>
+                    <input type="text" ng-required="true" name="name" ng-model="case.name" value="{{case.name}}">
+                </div>
+                <div>
+                    <label>Prezime (*)</label>
+                    <input type="text" ng-required="true" name="lastname" ng-model="case.lastname">
+                </div>
+                <div>
+                    <label>Kanton (*)</label>
+                    <select ng-required="true" name="area" ng-model="case.area">
+                        <option value="">Odaberi Kanton</option>
+                        <option value="Unsko/Sanski">Unsko/Sanski Kanton</option>
+                        <option value="Posavski">Posavski Kanton</option>
+                        <option value="Tuzlanski">Tuzlanski Kanton</option>
+                        <option value="Zenicko/Dobojski">Zenicko/Dobojski Kanton</option>
+                        <option value="Bosansko/Podrinjski">Bosansko/Podrinjski Kanton</option>
+                        <option value="Srednjobosanski">Srednjobosanski Kanton</option>
+                        <option value="Hercegovacko/Neretvanski">Hercegovacko/Neretvanski Kanton</option>
+                        <option value="Zapadno/Hercegovacki">Zapadno/Hercegovacki Kanton</option>
+                        <option value="Sarajevski">Sarajevski Kanton</option>
+                        <option value="Livanjski">Livanjski Kanton</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Adressa</label>
+                    <input type="text" name="address" ng-model="case.address">
+                </div>
+                <div>
+                    <label>Telefon</label>
+                    <input type="text" name="phone" ng-model="case.phone">
+                </div>
+                <div>
+                    <label>Clanovi porodice</label>
+                    <input type="text" name="family" ng-model="case.family">
+                </div>
+                <div>
+                    <label>Opis (*)</label>
+                    <textarea ng-required="true" name="description" ng-model="case.description" cols="30" rows="10"></textarea>
+                </div>
+                <div class="file-upload" flow-init="{target: '/humanitarna/builds/upload.php'}" flow-files-submitted="processFiles($files)">
+                    <div class="drop" flow-drop flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}" ng-style="style">Kliknite ili prevucite slike ovdje
+                        <input type="file" flow-btn/>
+                    </div>
+                    <div class="gallery">
+                        <a href="{{file}}" data-lightbox="gallery" ng-repeat="file in imageStrings">
+                            <div class="gallery-holder" style="background-image: url({{file}});"></div>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" ng-disabled="porodica.$invalid" class="submit" value="Unesi u bazu">
+                </div>
+            </form>
+        </div>
+        <div class="right">
+            <div class="inner">
+                <div ng-show="entry.$dirty">
+                    <h1>Porodicna prica</h1>
+                    <span ng-show="case.name || case.lastname">Moje ime je <strong>{{case.name}} {{case.lastname}}</strong>.</span>
+                    <span ng-show="case.address">Nalazim se na adresi <span class="case.address"><strong>{{case.address}}</strong><span ng-show="case.area">, <strong>{{case.area}} Kanton</strong></span></span>
+                    </span>
+                    <span ng-show="case.phone">Mozete me dobiti na broj telefona <strong>{{case.phone}}</strong>.</span>
+                    <span ng-show="case.family">Nasa porodica broji ukupno <strong>{{case.family}}</strong> clanova.</span>
+                    <div ng-show="case.description" class="description">Dodatni Opis:</div>
+                    <span class="description" ng-show="case.description">{{case.description}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="alert" ng-show="caseAdded">
+    <div class="inner">
+        <i class="fa fa-check"></i> OK
+    </div>
+</div>
+<script>
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true
+    })
+</script>
