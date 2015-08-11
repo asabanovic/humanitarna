@@ -20,7 +20,7 @@ myApp.controller('EntryController', function($scope, $rootScope, $firebaseObject
             cases.$add(data).then(function(ref) {
                 $scope.caseAdded = true;
                 $scope.entry.$setPristine();
-                $scope.imageStrings = null;
+                $scope.imageStrings = [];
                 var id = ref.key();
                 console.log("added record with id " + id);
              }, function(error) {

@@ -16,16 +16,7 @@ myApp.controller('NavigationController', function($scope, $location, $rootScope,
                 $rootScope.currentUser = authData.password.email;
                 $location.path('/lista');
                 $scope.loginButtonStatus = false;
-                /*var ref = new Firebase('https://humanitarna.firebaseio.com' + '/users/' + authData.uid);
-                var currentUser = $firebaseObject(ref);
-                currentUser.$loaded().then(function() {
-                    console.log(currentUser);
-                    $rootScope.currentUser = currentUser;
-                    $location.path('/lista');
-                    $scope.loginButtonStatus = false;
-                    console.log($scope);
-                }); */
-            }).catch(function(error) {
+             }).catch(function(error) {
                 console.log(error);
                 $scope.message = error.toString();
             });

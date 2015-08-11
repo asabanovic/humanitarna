@@ -217,6 +217,13 @@ body * {
                 color: white;
                 .section {
                     font-weight: 800;
+                    span {
+                        padding-left: 10px;
+                        cursor: pointer;
+                        &:hover {
+                            color: black;
+                        }
+                    }
                 }
             }
             &.entry {

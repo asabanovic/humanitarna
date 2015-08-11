@@ -2,13 +2,13 @@
     <ul class="listing">
         <li class="header">
             <div class="section order">#</div>
-            <div class="section name">IME</div>
-            <div class="section lastname">PREZIME</div>
-            <div class="section area">KANTON</div>
+            <div class="section name">IME <span ng-click="sortByName()"><i class="fa fa-sort"></i></span> </div>
+            <div class="section lastname">PREZIME <span ng-click="sortByLastname()"><i class="fa fa-sort"></i></span> </div>
+            <div class="section area">KANTON <span ng-click="sortByArea()"><i class="fa fa-sort"></i></span> </div>
             <div class="section place">ADRESA</div>
             <div class="section contact">KONTAKT</div>
         </li>
-        <li class="entry" style="animation-delay: {{$index * .1}}s; display: block;" ng-repeat="case in cases ">
+        <li class="entry" style="animation-delay: {{$index * .1}}s; display: block;" ng-repeat="case in cases | orderBy: customOrder ">
             <div class="section order">{{$index+1}}</div>
             <div class="section name">{{case.name}}</div>
             <div class="section lastname">{{case.lastname}}</div>

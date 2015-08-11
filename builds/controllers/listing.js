@@ -1,9 +1,19 @@
 myApp.controller('ListingController', function($scope, $rootScope, $firebaseObject, $firebaseArray) {
 
     var ref = new Firebase("https://humanitarna.firebaseio.com/cases");
-    var query = ref.orderByChild("date").limitToLast(25);
+    var query = ref.orderByChild("date");
     $scope.cases = $firebaseArray(query);
 
-    console.log($scope.cases);
+    $scope.sortByName = function(){
+     	$scope.customOrder = 'name';
+    }
+
+    $scope.sortByLastname = function(){
+		$scope.customOrder = 'lastname';
+    }
+
+    $scope.sortByArea = function(){
+    	$scope.customOrder = 'area';
+    }
 
 });
